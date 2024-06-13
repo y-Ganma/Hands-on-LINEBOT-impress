@@ -7,10 +7,14 @@ export const messageMap = {
     type: 'text',
     text: 'Hello, world',
   }),
+  おはよう: () => ({
+    type: 'text',
+    text: 'Good Morning!',
+  }),
   複数メッセージ: () => ([
     {
       type: 'text',
-      text: 'Hello, user',
+      text: 'こんにちは世界',
     },
     {
       type: 'text',
@@ -45,6 +49,74 @@ export const messageMap = {
         },
       ],
     },
+  }),
+  予定: () => ({
+    type: 'text',
+    text: '知りたい曜日を選択してください',
+    quickReply: {
+      items: [
+        {
+          type: 'action',
+          action: {
+            type: 'message',
+            text: '月曜日の予定',
+            label: 'Monday',
+          },
+        },
+        {
+          type: 'action',
+          action: {
+            type: 'message',
+            text: '火曜日の予定',
+            label: 'Tuesday',
+          },
+        },
+        {
+          type: 'action',
+          action: {
+            type: 'message',
+            text: '水曜日の予定',
+            label: 'Wednesday',
+          },
+        },
+        {
+          type: 'action',
+          action: {
+            type: 'message',
+            text: '木曜日の予定',
+            label: 'Thursday',
+          },
+        },
+        {
+          type: 'action',
+          action: {
+            type: 'message',
+            text: '金曜日の予定',
+            label: 'Friday',
+          },
+        },
+      ],
+    },
+  }),
+  月曜日の予定: () => ({
+    type: 'text',
+    text: '1.力学\n2.力学\n3.力学演習\n4.力学演習\n5.微積分\n6.微積分\n7.体育実技\n8.体育実技',
+  }),
+  火曜日の予定: () => ({
+    type: 'text',
+    text: '3.Prog0\n4.Prog0\n5.Prog0ex\n6.Prog0ex\n7.IE2\n8.IE2\n9.経営戦略\n10.経営戦略',
+  }),
+  水曜日の予定: () => ({
+    type: 'text',
+    text: '3.微積分\n4.微積分',
+  }),
+  木曜日の予定: () => ({
+    type: 'text',
+    text: '1.力学\n2.力学\n3.力学演習\n4.力学演習\n5.微積分\n6.微積分\n9.SCCP\n10.SCCP',
+  }),
+  金曜日の予定: () => ({
+    type: 'text',
+    text: '3.Prog0\n4.Prog0\n5.Prog0ex\n6.Prog0ex\n7.IE2\n8.IE2\n9.経営戦略\n10.経営戦略',
   }),
   スタンプメッセージ: () => ({
     type: 'sticker',
