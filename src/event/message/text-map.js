@@ -360,7 +360,7 @@ export const messageMap = {
         contents: [
           {
             type: 'text',
-            text: 'Flex Message',
+            text: 'My profile',
             color: '#FFFFFF',
             weight: 'bold',
           },
@@ -368,8 +368,8 @@ export const messageMap = {
       },
       hero: {
         type: 'image',
-        url: 'https://pbs.twimg.com/profile_images/1236928986212478976/wDa51i9T_400x400.jpg',
-        size: 'xl',
+        url: 'https://www.san-x.co.jp/sumikko/img/profile/h1.png',
+        size: '3xl',
       },
       body: {
         type: 'box',
@@ -377,14 +377,15 @@ export const messageMap = {
         contents: [
           {
             type: 'text',
-            text: 'しんぶんぶん',
+            text: '小高　幸也',
             size: 'xl',
+            style: 'normal',
             weight: 'bold',
             align: 'center',
           },
           {
             type: 'text',
-            text: '会津大学学部二年',
+            text: '会津大学　一年',
             align: 'center',
           },
           {
@@ -399,21 +400,20 @@ export const messageMap = {
                 type: 'button',
                 action: {
                   type: 'uri',
-                  label: 'ホームページ',
-                  uri: 'https://shinbunbun.info/',
+                  label: 'My webpage',
+                  uri: 'https://web-int.u-aizu.ac.jp/~s1320075/index.html',
                 },
-                style: 'primary',
-                offsetBottom: '10px',
+                style: 'link',
+
               },
               {
                 type: 'button',
                 action: {
                   type: 'uri',
-                  label: 'Twitter',
-                  uri: 'https://twitter.com/shinbunbun_',
+                  label: 'UoA website',
+                  uri: 'https://u-aizu.ac.jp/',
                 },
-                style: 'primary',
-                color: '#1DA1F2',
+                style: 'link',
               },
             ],
             paddingTop: '10px',
@@ -422,7 +422,7 @@ export const messageMap = {
       },
       styles: {
         header: {
-          backgroundColor: '#008282',
+          backgroundColor: '#2B91E9',
         },
       },
     },
