@@ -1,8 +1,6 @@
-import {
-  createData, deleteData, readData, updateData,
-} from '../../crud.js';
 import { get } from '../../request.js';
 import { error } from '../../log.js';
+//自分が考えたのを入れておくこと
 
 // ユーザーのプロフィールを取得する関数
 const getUserProfile = (event, client) => client.getProfile(event.source.userId);
@@ -459,57 +457,7 @@ export const messageMap = {
     type: 'text',
     text: `ここは${event.source.type}だよ！`,
   }),
-  Create: async (event, appContext) => {
-    const date = new Date();
-    await createData(event.source.userId, 'testData', `Data created at ${date}`, appContext);
-    return {
-      type: 'text',
-      text: 'データが作成されました',
-    };
-  },
-  Read: async (event, appContext) => {
-    const dbData = await readData(event.source.userId, 'testData', appContext);
-    return {
-      type: 'text',
-      text: `DBには以下のデータが保存されています\n\n${dbData.Items[0].Data}`,
-    };
-  },
-  Update: async (event, appContext) => {
-    const date = new Date();
-    await updateData(event.source.userId, 'testData', `Data created at ${date}`, appContext);
-    return {
-      type: 'text',
-      text: 'データを更新しました',
-    };
-  },
-  Delete: async (event, appContext) => {
-    await deleteData(event.source.userId, 'testData', appContext);
-    return {
-      type: 'text',
-      text: 'データを削除しました',
-    };
-  },
-  メモ: async (event, appContext) => {
-    const memoData = await readData(event.source.userId, 'memo', appContext);
-    if (memoData.Items[0]) {
-      return {
-        type: 'text',
-        text: `メモには以下のメッセージが保存されています\n\n${memoData.Items[0].Data}`,
-      };
-    }
 
-    return {
-      type: 'text',
-      text: 'メモが存在しません',
-    };
-  },
-  メモ開始: async (event, appContext) => {
-    await createData(event.source.userId, 'context', 'memoMode', appContext);
-    return {
-      type: 'text',
-      text: 'メモモードを開始しました',
-    };
-  },
   ニュース: async () => {
     // ニュースAPIのレスポンスを格納する変数を宣言
     let newsApiRes;
@@ -603,13 +551,316 @@ export const messageMap = {
     });
     return message;
   },
-  蔵書検索: async (event, appContext) => {
-    // DBにコンテキストを追加
-    await createData(event.source.userId, 'context', 'bookSearchMode2', appContext);
 
-    return {
+  //この先追加部分　（ヘルプなどもつけてみるといいかも）
+  攻略: () => ({
+    type: 'flex',
+    altText: 'Abyss',
+    contents: {
+      type: "bubble",
+      size: "mega",
+      header: {
+        type: "box",
+        layout: "vertical",
+        contents: [
+          {
+            type: "text",
+            text: "グランドアビス完全攻略",
+            color: "#FFFFE0",
+            weight: "bold",
+            style: "normal",
+            size: "lg"
+          },
+        ],
+        backgroundColor: "#FF00FF"
+      },
+      hero: {
+        type: "image",
+        url: "https://fukugyou-kakkiblog.com/wp-content/uploads/2024/06/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88-2024-06-13-220905.jpg",
+        size: "full",
+        margin: "none",
+        gravity: "top",
+        position: "relative",
+        offsetEnd: "none",
+        offsetStart: "none",
+        offsetTop: "none",
+        offsetBottom: "none"
+      },
+      body: {
+        type: "box",
+        layout: "vertical",
+        contents: [
+          {
+            type: "text",
+            text: "にゃんこ大戦争のイベント",
+            size: "md"
+          },
+          {
+            type: "text",
+            text: "「グランドアビス」の備忘録"
+          },
+          {
+            type: "text",
+            text: "（再度見る時はボタンを押してね）"
+          }
+        ],
+        margin: "none",
+        spacing: "none"
+      },
+      footer: {
+        type: "box",
+        layout: "vertical",
+        contents: [
+          {
+            type: "button",
+            action: {
+              type: "message",
+              label: "概要",
+              text: "概要"
+            },
+            style: "secondary",
+            color: "#32CD32",
+            margin: "none"
+          },
+          {
+            type: "button",
+            action: {
+              type: "message",
+              text: "注意点",
+              label: "注意ポイント"
+            },
+            style: "secondary",
+            margin: "md",
+            color: "#808000"
+          },
+          {
+            type: "button",
+            action: {
+              type: "message",
+              label: "多少のコツ",
+              text: "テクニック"
+            },
+            margin: "md",
+            style: "secondary",
+            color: "#E6E6FA"
+          },
+          {
+            type: "button",
+            action: {
+              type: "message",
+              label: "階層別アドバイス",
+              text: "階層"
+            },
+            color: "#FFD700",
+            margin: "md",
+            style: "secondary"
+          },
+          {
+            type: "button",
+            action: {
+              type: "uri",
+              label: "参考サイト（ここ見た方が早い）",
+              uri: "https://seesaawiki.jp/battlecatswiki/d/%C3%CF%C4%EC%CC%C2%B5%DC"
+            },
+          },
+        ],
+      },
+      styles: {
+        hero: {
+          separator: true,
+          separatorColor: "#000000",
+          backgroundColor: "#BDB76B"
+        },
+        body: {
+          separator: true,
+          separatorColor: "#1F1E33"
+        },
+        footer: {
+          separator: true,
+          separatorColor: "#000000"
+        }
+      }
+    },
+  }),
+
+  ヘルプ: () => ([
+    {
       type: 'text',
-      text: '検索したい本のISBNを送ってください\n※本のISBNは「検索したい本のタイトル ISBN」などとGoogleで検索すれば取得できます',
-    };
-  },
+      text: '以下の要素があります\n挨拶：挨拶を返す\n〇〇メッセージ：そのタイプに応じたメッセージを返す\n（例：スタンプ、動画、音声、画像など）\n〇〇テンプレート：ボタン、確認、カルーセルなど\nクイックリプライ：特殊メッセージを返す\n予定：2学期の予定を返す\n天気予報：直近3日分の天気予報\nFlex Message：制作者の名刺表示\nプロフィール：ユーザーの情報を返す',
+    },
+    {
+      type: 'text',
+      text: 'データベース：Create,Read,Update,Deleteで管理できます\nメモモード：「メモ開始」と入力、\nその後テキストを入力し、「メモ」と入力でメモを確認できます\nニュース：最近のニュースを確認できます\n蔵書検索：ISBNで本を検索できます\n攻略：作者なりの備忘録を見ることができます\n（データベースを使う機能は現在使えません。ご了承）',
+    },
+  ]),
+
+  Help: () => ([
+    {
+      type: 'text',
+      text: '以下の要素があります\n挨拶：挨拶を返す\n〇〇メッセージ：そのタイプに応じたメッセージを返す\n（例：スタンプ、動画、音声、画像など）\n〇〇テンプレート：ボタン、確認、カルーセルなど\nクイックリプライ：特殊メッセージを返す\n予定：2学期の予定を返す\n天気予報：直近3日分の天気予報\nFlex Message：制作者の名刺表示\nプロフィール：ユーザーの情報を返す',
+    },
+    {
+      type: 'text',
+      text: 'データベース：Create,Read,Update,Deleteで管理できます\nメモモード：「メモ開始」と入力、\nその後テキストを入力し、「メモ」と入力でメモを確認できます\nニュース：最近のニュースを確認できます\n蔵書検索：ISBNで本を検索できます\n攻略：作者なりの備忘録を見ることができます\n（データベースを使う機能は現在使えません。ご了承）',
+    },
+  ]),
+
+  概要: () => ({
+    type: 'text',
+    text: 'この備忘録は、にゃんこ大戦争のランキングイベント、地底迷宮グランドアビスの攻略となっています。\n全100ステージの構成となっており、正直面倒…なものです。\nもしかしたら、何かの役にたつかも？',
+  }),
+
+  注意点: () => ({
+    type: 'text',
+    text: '以下から選択してください',
+    quickReply: {
+      items: [
+        {
+          type: 'action',
+          action: {
+            type: 'message',
+            text: '敵について',
+            label: '敵',
+          },
+        },
+        {
+          type: 'action',
+          action: {
+            type: 'message',
+            text: '編成について',
+            label: '編成',
+          },
+        },
+        {
+          type: 'action',
+          action: {
+            type: 'message',
+            text: '罠について',
+            label: '罠',
+          },
+        },
+        {
+          type: 'action',
+          action: {
+            type: 'message',
+            text: 'その他留意点',
+            label: 'その他',
+          },
+        },
+      ],
+    },
+  }),
+
+  テクニック: () => ({
+    type: 'text',
+    text: 'キャラクターの使用優先順位は、超激レアキャラから使うのがベスト。\n理由は、キャラ数が一番多く、あまり使い所のないキャラが多いからである。',
+  }),
+
+  階層: () => ({
+    type: 'text',
+    text: '見たい階層を押してください',
+    quickReply: {
+      items: [
+        {
+          type: 'action',
+          action: {
+            type: 'message',
+            text: '10階まで',
+            label: '10階まで',
+          },
+        },
+        {
+          type: 'action',
+          action: {
+            type: 'message',
+            text: '11～30階',
+            label: '11～30階',
+          },
+        },
+        {
+          type: 'action',
+          action: {
+            type: 'message',
+            text: '31～50階',
+            label: '31～50階',
+          },
+        },
+        {
+          type: 'action',
+          action: {
+            type: 'message',
+            text: '51～70階',
+            label: '51～70階',
+          },
+        },
+        {
+          type: 'action',
+          action: {
+            type: 'message',
+            text: '71～90階',
+            label: '71～90階',
+          },
+        },
+        {
+          type: 'action',
+          action: {
+            type: 'message',
+            text: '91～最深部',
+            label: '91～最深部',
+          },
+        },
+      ],
+    },
+  }),
+  //quickreply points
+  敵について: () => ({
+    type: 'text',
+    text: '敵の属性を見るのも大事です。\n特に、ゾンビ、悪魔属性の敵がいるときは強めのキャラを入れることを推奨します。',
+  }),
+
+  編成について: () => ({
+    type: 'text',
+    text: '編成について、ここではキャラを10体編成しないと挑戦ができないため、\n最初のうちは弱めのキャラを多めに、深部になるほど増やしていくのがいいでしょう。\n詳しくは階層別の方でご覧ください。',
+  }),
+
+  罠について: () => ({
+    type: 'text',
+    text: 'ステージクリア時、敗北、撤退時にランダムでキャラが罠にかかります。\nかかる人数も進むごとに増えていきます。たまに救出できることがありますが、\n次のステージの敵に強いキャラか、壁役のキャラを優先しましょう。',
+  }),
+
+  その他留意点: () => ({
+    type: 'text',
+    text: '念の為、クリアに必要なキャラ数の目安を書いておきます。\n大体480～500体ぐらいは必要です。\nこれはかなり長くやっている人か、課金量が物凄い人が持つキャラ数と同じです。\nちなみに製作者は6年やって、560体くらい持っています。',
+  }),
+  // quickreply floors
+  '10階まで': () => ({
+    type: 'text',
+    text: '最初の階層なため、まだ余裕はあります。\nそのため、このあたりで弱めの超激レアキャラを使ってしまいましょう。',
+  }),
+
+  '11～30階': () => ({
+    type: 'text',
+    text: 'まだ敵はそこまで強くないため、コラボ限定のキャラも使ったほうがいいです。\nコラボは、超激レア以外はあまり使わないためです。',
+  }),
+
+  '31～50階': () => ({
+    type: 'text',
+    text: 'このあたりから、適当に編成を組めなくなってきます。\nまた、メタル属性の敵のために、クリティカルを持つキャラは温存しましょう。',
+  }),
+
+  '51～70階': () => ({
+    type: 'text',
+    text: '50階以降から、罠も敵も強くなり、編成も難しくなります。\nまた、61階から古代属性も出始めるため、対応キャラはここまで温存しておきましょう。',
+  }),
+
+  '71～90階': () => ({
+    type: 'text',
+    text: 'ここから、罠にかかるキャラが増え、キャラ数が問われます。\nまた、悪魔、ゾンビ属性の出現が多くなります。\nこのために、強いキャラは温存すべきでしょう。',
+  }),
+
+  '91～最深部': () => ({
+    type: 'text',
+    text: '最深部まであと少しです。\n敵の強さも最大になり、壁役のキャラがいないと押される可能性が高いです。そのため、できるだけ壁キャラはここまで温存しましょう。\nあとはステージ構成もありますが、それは運です。\n厄介な敵が出ないように、祈っておきましょう。',
+  }),
+
 };
